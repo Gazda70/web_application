@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import {DetectionData} from "../api/detection-data";
+import {DetectionData, DiscreteDetection} from "../api/detection-data";
 
 @Injectable()
 export class ConfigService {
   constructor(private http: HttpClient) { }
 
-  detectionDataURL = 'http://localhost:5000/predicitons'
+  detectionDataURL = 'http://localhost:5000/predictions'
+
+  detectionSetupURL = 'http://localhost:5000/setup'
 
 
   httpOptions = {
@@ -23,8 +25,24 @@ export class ConfigService {
     return this.http.get<DetectionData>(this.detectionDataURL);
   }
 
+  setupNewDetection(startTime:string, endTime:string): Observable<Object>{
+      /*const body = JSON.stringify({'id':1, 'time': {'start': startTime, 'end': endTime}});
+      console.log("body: ");
+      console.log(body);*/
+      const body: DetectionData = {
+        startDay:"Monday",
+        endDay:"Tuesday",
+        startTime:startTime,
+        endTime:endTime,
+        totalDetections:[]
+      }
+
+      return this.http.post(this.detectionSetupURL, body);
+  }
+
   getTestString() {
     return this.http.get(this.detectionDataURL, this.httpOptions);
   }
 
 }
+

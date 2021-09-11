@@ -1,1 +1,36 @@
 <p>start-screen works!</p>
+
+<!--
+<form [formGroup]="startTimeForm">
+  <mat-form-field appearance="fill">
+    <mat-label>Start time</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field >
+</form>
+
+<form [formGroup]="endTimeForm">
+  <mat-form-field appearance="fill">
+    <mat-label>End time</mat-label>
+    <input matInput formControlName="name">
+  </mat-form-field>
+</form>-->
+
+
+<form name="timeForm">
+  <mat-form-field appearance="fill" #start>
+    <mat-label>Start time</mat-label>
+    <input matInput name="startTime" [(ngModel)] = "startTime">
+  </mat-form-field >
+
+  <mat-form-field appearance="fill" #end>
+    <mat-label>End time</mat-label>
+    <input matInput name="endTime" [(ngModel)] = "endTime">
+  </mat-form-field>
+</form>
+
+<button mat-raised-button (click)="detect()">Start detection</button>
+
+<button mat-raised-button (click)="detect()">Detect </button>
+
+
+<!--<button mat-button (click)="this.startNewDetection()">Start detection</button>-->

@@ -11,12 +11,16 @@ import {MatButtonModule} from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { HttpClientModule } from '@angular/common/http';
 import {ConfigService} from "./services/reqest.service";
+import {TextFieldModule} from '@angular/cdk/text-field';
+import {MatFormFieldModule, MatLabel} from '@angular/material/form-field';
+import {MatInputModule} from "@angular/material/input";
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     HourlyPresenceComponent,
-    StartScreenComponent,
+    StartScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +30,11 @@ import {ConfigService} from "./services/reqest.service";
     BrowserAnimationsModule,
     MatButtonModule,
     MatSliderModule,
+    TextFieldModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [ConfigService],
   bootstrap: [AppComponent]
