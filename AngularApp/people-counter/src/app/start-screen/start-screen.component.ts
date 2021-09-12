@@ -9,10 +9,6 @@ import {DetectionData} from "../api/detection-data";
   styleUrls: ['./start-screen.component.css']
 })
 export class StartScreenComponent implements OnInit {
-  /*
-  public startTimeForm:FormGroup;
-
-  public endTimeForm:FormGroup;*/
 
   neuralNetworksAvailable:string[] = []
   neuralNetworkChosen = '';
@@ -20,20 +16,31 @@ export class StartScreenComponent implements OnInit {
   startTime:string = '';
   endTime:string = '';
 
-  /*@ViewChild('start', {static: true}) startTime: ElementRef;
-  @ViewChild('end', {static: true}) endTime: ElementRef;*/
+  time: number = 0;
+  display: any;
+  interval: any;
+
+  startTimer() {
+    console.log("=====>");
+    this.interval = setInterval(() => {
+      if (this.time === 0) {
+        this.time++;
+      } else {
+        this.time++;
+      }
+      this.display=this.transform( this.time)
+    }, 1000);
+  }
+  transform(value: number): string {
+    const minutes: number = Math.floor(value / 60);
+    return minutes + ':' + (value - minutes * 60);
+  }
+  pauseTimer() {
+    clearInterval(this.interval);
+  }
 
 
   constructor(startTime: ElementRef, endTime: ElementRef, private configService:ConfigService, private formBuilder: FormBuilder) {
-    /*this.startTime = startTime;
-    this.endTime = endTime;*/
-    /*
-    this.startTimeForm = this.formBuilder.group({
-      name: ''
-    });
-    this.endTimeForm = this.formBuilder.group({
-      name: ''
-    });*/
     this.neuralNetworksAvailable.push("GazdaWitekLipka Detector");
     this.neuralNetworksAvailable.push("SSD Mobilenetv2 Detector");
     this.neuralNetworksAvailable.push("YOLO Tiny v2 Detector");
@@ -51,7 +58,8 @@ export class StartScreenComponent implements OnInit {
     /*console.log("startTimeForm "  + this.startTimeForm.get('name')?.value);
     console.log("endTimeForm "  + this.endTimeForm.get('name')?.value);*/
 
-    this.configService.setupNewDetection(this.startTime, this.endTime).subscribe(
+    this.configService.setupNewDetection(this.startTime, this.endTime,
+      this.neuralNetworkChosen, 0.3, 0.1).subscribe(
       {
         next: (value => {console.log("Response: " + value as DetectionData['startDay']);})
       }
@@ -67,14 +75,5 @@ export class StartScreenComponent implements OnInit {
       this.isDetecting = true;
       this.detect();
     }
-  }
-  setupNewDetection(){
-    /*console.log("endTime: " + endTime);
-    console.log("startTime: " + startTime);*/
-    this.configService.setupNewDetection("halo", "witam").subscribe(
-      {
-        next: (value => {console.log("Response: " + value);})
-      }
-    )
   }
 }

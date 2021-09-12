@@ -13,6 +13,9 @@ export interface DiscreteDetection{
 
 
 export interface DetectionData{
+  networkType:string,
+  objThreshold:number,
+  iouThreshold:number,
   startDay:string,
   endDay:string,
   startTime:string,

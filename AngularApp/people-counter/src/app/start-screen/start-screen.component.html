@@ -37,4 +37,9 @@
 
 <button mat-raised-button [disabled]="this.isDetecting" (click)="this.validateDetectionSetup()">Start detection</button>
 
+<button (click)='startTimer()'>Start Timer</button>
+<button (click)='pauseTimer()'>Pause</button>
+
+<p>{{display }} Seconds</p>
+
 <mat-progress-spinner *ngIf="this.isDetecting" mode="indeterminate">
