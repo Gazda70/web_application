@@ -16,13 +16,13 @@
 
 
 <form name="timeForm">
-  <mat-form-field appearance="fill" #start>
+  <!--<mat-form-field appearance="fill" #start>
     <mat-label>Start time</mat-label>
     <input matInput name="startTime" [disabled]="this.isDetecting" [(ngModel)] = "startTime">
-  </mat-form-field >
+  </mat-form-field >-->
 
   <mat-form-field appearance="fill" #end>
-    <mat-label>End time</mat-label>
+    <mat-label>Detection time</mat-label>
     <input matInput name="endTime" [disabled]="this.isDetecting" [(ngModel)] = "endTime">
   </mat-form-field>
 </form>
@@ -37,9 +37,9 @@
 
 <button mat-raised-button [disabled]="this.isDetecting" (click)="this.validateDetectionSetup()">Start detection</button>
 
-<button (click)='startTimer()'>Start Timer</button>
+<!--<button (click)='startTimer()'>Start Timer</button>
 <button (click)='pauseTimer()'>Pause</button>
 
-<p>{{display }} Seconds</p>
+<p>{{display }} Seconds</p>-->
 
 <mat-progress-spinner *ngIf="this.isDetecting" mode="indeterminate">

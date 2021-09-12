@@ -4,6 +4,10 @@ export interface DetectedObject {
   boundingBoxIOU:number
 }
 
+export interface DetectionState {
+  isOngoing:string
+}
+
 
 export interface DiscreteDetection{
   detections:DetectedObject[],

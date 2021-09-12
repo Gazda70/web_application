@@ -2,15 +2,17 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import {DetectionData, DiscreteDetection} from "../api/detection-data";
+import {DetectionData, DetectionState, DiscreteDetection} from "../api/detection-data";
 
 @Injectable()
 export class ConfigService {
   constructor(private http: HttpClient) { }
 
-  detectionDataURL = 'http://localhost:5000/predictions'
+  detectionDataURL = 'http://192.168.0.241:5000/predictions'
 
-  detectionSetupURL = 'http://localhost:5000/setup'
+  detectionSetupURL = 'http://192.168.0.241:5000/setup'
+
+  detectionStateURL = 'http://192.168.0.241:5000/check_detection_state'
 
 
   httpOptions = {
@@ -27,7 +29,7 @@ export class ConfigService {
 
   setupNewDetection(startTime:string, endTime:string,
                     networkType:string, objThreshold:number,
-                    iouThreshold:number): Observable<Object>{
+                    iouThreshold:number): Observable<any>{
       /*const body = JSON.stringify({'id':1, 'time': {'start': startTime, 'end': endTime}});
       console.log("body: ");
       console.log(body);*/
@@ -43,6 +45,10 @@ export class ConfigService {
       }
 
       return this.http.post(this.detectionSetupURL, body);
+  }
+
+  getDetectionState():Observable<string>{
+    return this.http.get<string>(this.detectionStateURL, this.httpOptions)
   }
 
   getTestString() {
