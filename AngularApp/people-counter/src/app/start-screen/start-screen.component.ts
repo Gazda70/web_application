@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ConfigService} from "../services/reqest.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {DetectionData} from "../api/detection-data";
 
 @Component({
   selector: 'app-start-screen',
@@ -13,6 +14,9 @@ export class StartScreenComponent implements OnInit {
 
   public endTimeForm:FormGroup;*/
 
+  neuralNetworksAvailable:string[] = []
+  neuralNetworkChosen = '';
+  isDetecting:boolean = false;
   startTime:string = '';
   endTime:string = '';
 
@@ -30,10 +34,12 @@ export class StartScreenComponent implements OnInit {
     this.endTimeForm = this.formBuilder.group({
       name: ''
     });*/
+    this.neuralNetworksAvailable.push("GazdaWitekLipka Detector");
+    this.neuralNetworksAvailable.push("SSD Mobilenetv2 Detector");
+    this.neuralNetworksAvailable.push("YOLO Tiny v2 Detector");
   }
 
   ngOnInit(): void {
-
   }
 
   detect(){
@@ -47,11 +53,21 @@ export class StartScreenComponent implements OnInit {
 
     this.configService.setupNewDetection(this.startTime, this.endTime).subscribe(
       {
-        next: (value => {console.log("Response: " + value);})
+        next: (value => {console.log("Response: " + value as DetectionData['startDay']);})
       }
     )
   }
 
+  setChosenNeuralNetwork(neuralNetworkName:string){
+    this.neuralNetworkChosen = neuralNetworkName;
+  }
+
+  validateDetectionSetup(){
+    if(this.startTime != '' && this.endTime != '' && this.neuralNetworkChosen != '') {
+      this.isDetecting = true;
+      this.detect();
+    }
+  }
   setupNewDetection(){
     /*console.log("endTime: " + endTime);
     console.log("startTime: " + startTime);*/
@@ -60,12 +76,5 @@ export class StartScreenComponent implements OnInit {
         next: (value => {console.log("Response: " + value);})
       }
     )
-    //if(startTime != undefined && endTime != undefined) {
-      /*this.configService.setupNewDetection(this.startTime, this.endTime).subscribe(
-        {
-        next: (value => {console.log("Response: " + value);})
-        }
-      )*/
-    //}
   }
 }

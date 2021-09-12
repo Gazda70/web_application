@@ -1,4 +1,3 @@
-<p>start-screen works!</p>
 
 <!--
 <form [formGroup]="startTimeForm">
@@ -19,18 +18,23 @@
 <form name="timeForm">
   <mat-form-field appearance="fill" #start>
     <mat-label>Start time</mat-label>
-    <input matInput name="startTime" [(ngModel)] = "startTime">
+    <input matInput name="startTime" [disabled]="this.isDetecting" [(ngModel)] = "startTime">
   </mat-form-field >
 
   <mat-form-field appearance="fill" #end>
     <mat-label>End time</mat-label>
-    <input matInput name="endTime" [(ngModel)] = "endTime">
+    <input matInput name="endTime" [disabled]="this.isDetecting" [(ngModel)] = "endTime">
   </mat-form-field>
 </form>
 
-<button mat-raised-button (click)="detect()">Start detection</button>
+<button mat-button [disabled]="this.isDetecting" [matMenuTriggerFor]="neuralNetworksMenu">Choose detector neural network</button>
 
-<button mat-raised-button (click)="detect()">Detect </button>
+<mat-menu #neuralNetworksMenu="matMenu">
+  <ng-template matMenuContent>
+    <button mat-menu-item (click)="this.setChosenNeuralNetwork(neuralNetworkName)" *ngFor="let neuralNetworkName of this.neuralNetworksAvailable">{{neuralNetworkName}}</button>
+  </ng-template>
+</mat-menu>
 
+<button mat-raised-button [disabled]="this.isDetecting" (click)="this.validateDetectionSetup()">Start detection</button>
 
-<!--<button mat-button (click)="this.startNewDetection()">Start detection</button>-->
+<mat-progress-spinner *ngIf="this.isDetecting" mode="indeterminate">

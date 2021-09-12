@@ -15,6 +15,8 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatFormFieldModule, MatLabel} from '@angular/material/form-field';
 import {MatInputModule} from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -33,8 +35,10 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
     TextFieldModule,
     MatFormFieldModule,
     MatInputModule,
+    MatMenuModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatProgressSpinnerModule
   ],
   providers: [ConfigService],
   bootstrap: [AppComponent]
