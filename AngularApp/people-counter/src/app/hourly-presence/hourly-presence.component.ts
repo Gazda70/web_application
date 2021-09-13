@@ -25,12 +25,6 @@ export class HourlyPresenceComponent implements OnInit {
 
   public detectionsDurationChartData:any = [];
 
-  update$: Subject<any> = new Subject();
-
-// Update function
-updateChart(){
-    this.update$.next(true);
-}
 
   testString:string = 'Not obtained test string from server !';
 
@@ -55,7 +49,6 @@ updateChart(){
       "name": this.detectionData["timestamp"],
       "value": this.detectionData["secondsOfDetection"]
     }]
-    //this.updateChart();
     console.log("this.detectionsDurationChartData length: " + this.detectionsDurationChartData.length);
     //window.location.reload();
       //}
