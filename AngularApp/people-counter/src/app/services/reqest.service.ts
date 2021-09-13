@@ -27,7 +27,7 @@ export class ConfigService {
     return this.http.get<DetectionData>(this.detectionDataURL);
   }
 
-  setupNewDetection(startTime:string, endTime:string,
+  setupNewDetection(startTime:string, numberOfSecondsForDetection:number,
                     networkType:string, objThreshold:number,
                     iouThreshold:number): Observable<any>{
       /*const body = JSON.stringify({'id':1, 'time': {'start': startTime, 'end': endTime}});
@@ -37,11 +37,8 @@ export class ConfigService {
         networkType:networkType,
         objThreshold:objThreshold,
         iouThreshold:iouThreshold,
-        startDay:"Monday",
-        endDay:"Tuesday",
         startTime:startTime,
-        endTime:endTime,
-        totalDetections:[]
+        numberOfSecondsForDetection:numberOfSecondsForDetection
       }
 
       return this.http.post(this.detectionSetupURL, body);

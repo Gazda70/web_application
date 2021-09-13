@@ -20,11 +20,8 @@ export interface DetectionData{
   networkType:string,
   objThreshold:number,
   iouThreshold:number,
-  startDay:string,
-  endDay:string,
   startTime:string,
-  endTime:string
-  totalDetections: DiscreteDetection[]
+  numberOfSecondsForDetection:number
 }
 
 

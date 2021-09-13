@@ -14,6 +14,7 @@ export class StartScreenComponent implements OnInit, OnChanges {
   neuralNetworkChosen = '';
   isDetecting:boolean = false;
   endTime:string = '';
+  numberOfSecondsForDetection:number = 0;
 
  /* time: number = 0;
   display: any;
@@ -45,7 +46,7 @@ export class StartScreenComponent implements OnInit, OnChanges {
     this.neuralNetworksAvailable.push("YOLO Tiny v2 Detector");
   }
   ngOnChanges(changes: SimpleChanges): void {
-    this.configService.getDetectionState().subscribe(
+    /*this.configService.getDetectionState().subscribe(
       {
         next: (value => {
           if(value == "true"){
@@ -54,40 +55,74 @@ export class StartScreenComponent implements OnInit, OnChanges {
           console.log("Is detection: " + value);
         })
       }
-    )
+    )*/
   }
 
   ngOnInit(): void {
     console.log("Start");
+    this.validateDetectionTime();
   }
 
   detect(){
-    /*console.log("start "  + this.startTime.nativeElement.value);
-    console.log("end "  + this.endTime.nativeElement.value);*/
-    //console.log("start "  + this.startTime);
     console.log("end "  + this.endTime);
 
-    /*console.log("startTimeForm "  + this.startTimeForm.get('name')?.value);
-    console.log("endTimeForm "  + this.endTimeForm.get('name')?.value);*/
-
-    this.configService.setupNewDetection('', this.endTime,
-      this.neuralNetworkChosen, 0.3, 0.1).subscribe(
-      {
-        next: (value => {console.log("Response: " + value['startDay']);})
-      }
-    )
+    if(this.validateDetectionSetup()){
+      this.isDetecting = true;
+      this.detect();
+      this.configService.setupNewDetection('', this.numberOfSecondsForDetection,
+        this.neuralNetworkChosen, 0.3, 0.1).subscribe(
+        {
+          next: (value => {console.log("Response: " + value['startDay']);})
+        }
+      )
+    }
   }
 
   setChosenNeuralNetwork(neuralNetworkName:string){
     this.neuralNetworkChosen = neuralNetworkName;
   }
 
-  validateDetectionSetup(){
-    if(this.endTime != '' && this.neuralNetworkChosen != '') {
-      this.isDetecting = true;
-      this.detect();
+  validateDetectionTime():boolean{
+    var re = /^(?:([01]?\d|2[0-3]):([0-5]?\d))?$/;
+    if(re.test(this.endTime)){
+      const hhMM = this.endTime.split(':');
+      var currentdate = new Date();
+      var resultHours = parseInt(hhMM[0], 10) - currentdate.getHours();
+      var resultMinutes = parseInt(hhMM[1], 10) - currentdate.getMinutes();
+      if (resultHours < 0){
+          window.alert("You can't setup detection for time in past. Increase hour !");
+          return false;
+      }
+      if(resultMinutes < 0) {
+        if(resultHours == 0){
+          window.alert("You can't setup detection for time in past. Increase minutes !");
+          return false;
+        }
+        resultMinutes = 60 - resultMinutes;
+      }
+      console.log("Result hours: " + resultHours);
+      console.log("Result minutes: " + resultMinutes);
+      this.calculateSecondsForDetection(resultHours, resultMinutes);
+      return true;
     }else{
-      window.alert("You didnt't fill out all necessary forms to start detecting !")
+      window.alert("You need to put detection end time in the format of HH:MM !");
+      return false;
     }
   }
+
+  validateDetectionSetup(){
+    if(this.endTime != '' && this.neuralNetworkChosen != '') {
+      if(this.validateDetectionTime()){
+        return true;
+      }
+    }else{
+      window.alert("You didnt't fill out all necessary forms to start detecting !");
+    }
+    return false;
+  }
+
+  calculateSecondsForDetection(hours:number, minutes:number){
+    this.numberOfSecondsForDetection = hours * 3600 + minutes * 60;
+  }
+
 }
