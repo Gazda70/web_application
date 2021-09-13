@@ -24,4 +24,10 @@ export interface DetectionData{
   numberOfSecondsForDetection:number
 }
 
+export interface DetectionDataResponse{
+  timestamp:string,
+  secondsOfDetection:string,
+  detections:any[],
+  numberOfDetections:string
+}
 

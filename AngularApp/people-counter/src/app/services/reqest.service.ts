@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
-import {DetectionData, DetectionState, DiscreteDetection} from "../api/detection-data";
+import {DetectionData, DetectionState, DiscreteDetection, DetectionDataResponse} from "../api/detection-data";
 
 @Injectable()
 export class DetectionService {
@@ -41,7 +41,7 @@ export class DetectionService {
   }
 
   getDetectionStatistics():Observable<any>{
-    return this.http.get(this.detectionDataURL, this.httpOptions)
+    return this.http.get<any>(this.detectionDataURL, this.httpOptions)
   }
   getDetectionState():Observable<string>{
     return this.http.get<string>(this.detectionStateURL, this.httpOptions)

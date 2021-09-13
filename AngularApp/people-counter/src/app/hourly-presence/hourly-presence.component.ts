@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {DetectionService} from "../services/reqest.service";
-import {DetectionData} from "../api/detection-data";
+import {DetectionData, DetectionDataResponse} from "../api/detection-data";
+import { NullVisitor } from '@angular/compiler/src/render3/r3_ast';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-hourly-presence',
@@ -10,9 +12,25 @@ import {DetectionData} from "../api/detection-data";
 })
 export class HourlyPresenceComponent implements OnInit {
 
-  constructor(private detectionService:DetectionService) { }
+  constructor(private detectionService:DetectionService) { 
+    this.getDetectionData();
+  }
 
-  detectionData:DetectionData[] = [];
+  detectionData:DetectionDataResponse = {
+    timestamp:'',
+    secondsOfDetection:'',
+    detections:[],
+    numberOfDetections:''
+  };
+
+  public detectionsDurationChartData:any = [];
+
+  update$: Subject<any> = new Subject();
+
+// Update function
+updateChart(){
+    this.update$.next(true);
+}
 
   testString:string = 'Not obtained test string from server !';
 
@@ -20,13 +38,37 @@ export class HourlyPresenceComponent implements OnInit {
   getDetectionData() {
     this.detectionService.getDetectionStatistics()
       .subscribe(
-        (data) => {console.log(data)}
+        (data) => {console.log(data); 
+          this.detectionData = JSON.parse(data);
+          this.initializeDetectionsTimeChart();
+          //window.location.reload();
+        }
       );
+      //window.location.reload();
+  }
+
+  initializeDetectionsTimeChart(){
+      //for(let detection of this.detectionData){
+    console.log("timestamp: " + this.detectionData["timestamp"]);
+    console.log("secondsOfDetection: " + this.detectionData["secondsOfDetection"]);
+    this.detectionsDurationChartData = [{
+      "name": this.detectionData["timestamp"],
+      "value": this.detectionData["secondsOfDetection"]
+    }]
+    //this.updateChart();
+    console.log("this.detectionsDurationChartData length: " + this.detectionsDurationChartData.length);
+    //window.location.reload();
+      //}
+  }
+
+  obtainDetectionData(){
+    return this.detectionsDurationChartData;
   }
 
 
+
   ngOnInit(): void {
-    this.getDetectionData();
+    //this.getDetectionData();
   }
 
   title = 'Angular Charts';
@@ -39,9 +81,9 @@ export class HourlyPresenceComponent implements OnInit {
   gradient = false;
   showLegend = true;
   showXAxisLabel = true;
-  xAxisLabel = 'Country';
+  xAxisLabel = 'Session time';
   showYAxisLabel = true;
-  yAxisLabel = 'Sales';
+  yAxisLabel = 'Session duration';
   timeline = true;
 
   colorScheme = {
@@ -52,7 +94,7 @@ export class HourlyPresenceComponent implements OnInit {
   showLabels = true;
 
   // data goes here
-  public single = [
+  /*public sessions = [
     {
       "name": "Monday",
       "value": 2243772
@@ -81,7 +123,7 @@ export class HourlyPresenceComponent implements OnInit {
       "name": "Sunday",
       "value": 45678
     }
-  ];
+  ];*/
 
   public multi = [
     {

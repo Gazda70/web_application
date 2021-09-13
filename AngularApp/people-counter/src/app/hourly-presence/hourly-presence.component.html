@@ -6,19 +6,20 @@
     Welcome to {{ title }}!
   </h1>
   <h3 class="text-secondary">
-    PEV Selling Countries
+    Detection summary
   </h3>
   <div class="row ml-5">
   <div class="col">
     <div class="row">
       <h4>
-        Vertical Bar Chart
+        People detected by detection session
       </h4>
     </div>
     <div class="row">
       <ngx-charts-bar-vertical
         [view]="view"
-        [results]="single"
+        [update$]="update$"
+        [results]="detectionsDurationChartData"
         [gradient]="gradient"
         [xAxis]="showXAxis"
         [yAxis]="showYAxis"
