@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
-import {ConfigService} from "../services/reqest.service";
+import {DetectionService} from "../services/reqest.service";
 import {DetectionData} from "../api/detection-data";
 
 @Component({
@@ -10,7 +10,7 @@ import {DetectionData} from "../api/detection-data";
 })
 export class HourlyPresenceComponent implements OnInit {
 
-  constructor(private configService:ConfigService) { }
+  constructor(private detectionService:DetectionService) { }
 
   detectionData:DetectionData[] = [];
 
@@ -18,15 +18,15 @@ export class HourlyPresenceComponent implements OnInit {
 
 
   getDetectionData() {
-    this.configService.getConfig()
-      .subscribe((data: DetectionData) => this.detectionData.push(data));
+    this.detectionService.getDetectionStatistics()
+      .subscribe(
+        (data) => {console.log(data)}
+      );
   }
 
-  getTestString(){
-    this.configService.getTestString().subscribe( (test:any) => this.testString = test.text);
-  }
 
   ngOnInit(): void {
+    this.getDetectionData();
   }
 
   title = 'Angular Charts';

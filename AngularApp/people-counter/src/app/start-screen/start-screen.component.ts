@@ -1,5 +1,5 @@
 import {Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
-import {ConfigService} from "../services/reqest.service";
+import {DetectionService} from "../services/reqest.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {DetectionData, DetectionState} from "../api/detection-data";
 
@@ -40,7 +40,7 @@ export class StartScreenComponent implements OnInit, OnChanges {
   }*/
 
 
-  constructor(startTime: ElementRef, endTime: ElementRef, private configService:ConfigService, private formBuilder: FormBuilder) {
+  constructor(private detectionService:DetectionService) {
     this.neuralNetworksAvailable.push("GazdaWitekLipka Detector");
     this.neuralNetworksAvailable.push("SSD Mobilenetv2 Detector");
     this.neuralNetworksAvailable.push("YOLO Tiny v2 Detector");
@@ -59,22 +59,32 @@ export class StartScreenComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    console.log("Start");
-    this.validateDetectionTime();
+    //console.log("Start");
+    //this.validateDetectionTime();
   }
 
   detect(){
-    console.log("end "  + this.endTime);
-
-    if(this.validateDetectionSetup()){
+    const setupCheck = this.validateDetectionSetup();
+    console.log("setupCheck: " + setupCheck);
+    if(setupCheck == true){
       this.isDetecting = true;
-      this.detect();
-      this.configService.setupNewDetection('', this.numberOfSecondsForDetection,
-        this.neuralNetworkChosen, 0.3, 0.1).subscribe(
+      console.log("Detecting");
+      this.detectionService.setupNewDetection('', this.numberOfSecondsForDetection,
+      this.convertNetworkName(this.neuralNetworkChosen), 0.3, 0.1).subscribe(
         {
-          next: (value => {console.log("Response: " + value['startDay']);})
+          next: (value => {console.log("Response: " + value);})
         }
       )
+    }
+  }
+
+  convertNetworkName(nName:string):string{
+    if(nName == "GazdaWitekLipka Detector"){
+      return "CUSTOM";
+    }else if(nName == "SSD Mobilenetv2 Detector"){
+      return "SSD";
+    }else{
+      return "YOLO";
     }
   }
 
@@ -103,6 +113,7 @@ export class StartScreenComponent implements OnInit, OnChanges {
       console.log("Result hours: " + resultHours);
       console.log("Result minutes: " + resultMinutes);
       this.calculateSecondsForDetection(resultHours, resultMinutes);
+      console.log("Seconds for detection: " + this.numberOfSecondsForDetection);
       return true;
     }else{
       window.alert("You need to put detection end time in the format of HH:MM !");
@@ -110,9 +121,11 @@ export class StartScreenComponent implements OnInit, OnChanges {
     }
   }
 
-  validateDetectionSetup(){
+  validateDetectionSetup():boolean{
     if(this.endTime != '' && this.neuralNetworkChosen != '') {
-      if(this.validateDetectionTime()){
+      const timeCheck = this.validateDetectionTime();
+      if(timeCheck == true){
+        console.log("timeCheck: " + timeCheck);
         return true;
       }
     }else{

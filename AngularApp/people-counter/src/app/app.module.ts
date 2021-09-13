@@ -10,7 +10,7 @@ import { StartScreenComponent } from './start-screen/start-screen.component';
 import {MatButtonModule} from '@angular/material/button';
 import { MatSliderModule } from '@angular/material/slider';
 import { HttpClientModule } from '@angular/common/http';
-import {ConfigService} from "./services/reqest.service";
+import {DetectionService} from "./services/reqest.service";
 import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatFormFieldModule, MatLabel} from '@angular/material/form-field';
 import {MatInputModule} from "@angular/material/input";
@@ -40,7 +40,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ReactiveFormsModule,
     MatProgressSpinnerModule
   ],
-  providers: [ConfigService],
+  providers: [DetectionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

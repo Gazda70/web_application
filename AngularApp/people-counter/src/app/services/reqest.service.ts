@@ -5,7 +5,7 @@ import { catchError, retry } from 'rxjs/operators';
 import {DetectionData, DetectionState, DiscreteDetection} from "../api/detection-data";
 
 @Injectable()
-export class ConfigService {
+export class DetectionService {
   constructor(private http: HttpClient) { }
 
   detectionDataURL = 'http://192.168.0.241:5000/predictions'
@@ -22,10 +22,6 @@ export class ConfigService {
 
     } ),responseType: 'text' as 'json'
   };
-
-  getConfig() {
-    return this.http.get<DetectionData>(this.detectionDataURL);
-  }
 
   setupNewDetection(startTime:string, numberOfSecondsForDetection:number,
                     networkType:string, objThreshold:number,
@@ -44,6 +40,9 @@ export class ConfigService {
       return this.http.post(this.detectionSetupURL, body);
   }
 
+  getDetectionStatistics():Observable<any>{
+    return this.http.get(this.detectionDataURL, this.httpOptions)
+  }
   getDetectionState():Observable<string>{
     return this.http.get<string>(this.detectionStateURL, this.httpOptions)
   }

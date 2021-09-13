@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ConfigService} from "./services/reqest.service";
+import {DetectionService} from "./services/reqest.service";
 import {DetectionData} from "./api/detection-data";
 
 @Component({
@@ -10,12 +10,12 @@ import {DetectionData} from "./api/detection-data";
 export class AppComponent implements OnInit{
   title = 'people-counter';
 
-  constructor(private configService:ConfigService) { }
+  constructor(private detectionService:DetectionService) { }
 
   testString:string = 'Not obtained test string from server !';
 
   getTestString(){
-    this.configService.getTestString().subscribe( (test:any) => {
+    this.detectionService.getTestString().subscribe( (test:any) => {
       this.testString = test;
       console.log("test.text: " + test)
     });
