@@ -16,14 +16,24 @@ export class HourlyPresenceComponent implements OnInit {
     this.getDetectionData();
   }
 
-  detectionData:DetectionDataResponse = {
+ /* detectionData:DetectionDataResponse = {
     timestamp:'',
     secondsOfDetection:'',
     detections:[],
     numberOfDetections:''
-  };
+  };*/
+  detectionData:any = null;
+
 
   public detectionsDurationChartData:any = [];
+
+  xAxisLabelDuration = 'Session time';
+  yAxisLabelDuration = 'Session duration';
+
+  public detectionPersonPerFramerChartData:any = [];
+
+  xAxisLabelPerson = 'Number of frame';
+  yAxisLabelPerson = 'Number of people on frame';
 
 
   testString:string = 'Not obtained test string from server !';
@@ -34,24 +44,37 @@ export class HourlyPresenceComponent implements OnInit {
       .subscribe(
         (data) => {console.log(data); 
           this.detectionData = JSON.parse(data);
-          this.initializeDetectionsTimeChart();
-          //window.location.reload();
+          this.initializeDetectionsDurationChart();
+          this.initializeDetectionsPersonNumberChart();
         }
       );
-      //window.location.reload();
   }
 
-  initializeDetectionsTimeChart(){
-      //for(let detection of this.detectionData){
-    console.log("timestamp: " + this.detectionData["timestamp"]);
-    console.log("secondsOfDetection: " + this.detectionData["secondsOfDetection"]);
-    this.detectionsDurationChartData = [{
-      "name": this.detectionData["timestamp"],
-      "value": this.detectionData["secondsOfDetection"]
-    }]
-    console.log("this.detectionsDurationChartData length: " + this.detectionsDurationChartData.length);
-    //window.location.reload();
-      //}
+  initializeDetectionsDurationChart(){
+    let detDat = [];
+    for(var i = 0; i < this.detectionData.length; i++) {
+      var obj = this.detectionData[i];
+      detDat.push({
+        "name": this.detectionData[i]["timestamp"],
+        "value": this.detectionData[i]["secondsOfDetection"]
+      })
+  }
+    this.detectionsDurationChartData = detDat
+  }
+
+  initializeDetectionsPersonNumberChart(){
+    var lastDetection = this.detectionData[this.detectionData.length - 1];
+    let detFrames = lastDetection["detections"];
+    let detFramesChart = [];
+    for(var i = 0; i < detFrames.length; i++) {
+      console.log("detFrames[i]");
+      console.log(detFrames[i]);
+        detFramesChart.push({
+          "name":i,
+          "value": detFrames[i].split('=')[3].split('{').length - 1
+        })
+    }
+    this.detectionPersonPerFramerChartData = detFramesChart;
   }
 
   obtainDetectionData(){
@@ -72,9 +95,9 @@ export class HourlyPresenceComponent implements OnInit {
   showXAxis = true;
   showYAxis = true;
   gradient = false;
-  showLegend = true;
+  showLegend = false;
   showXAxisLabel = true;
-  xAxisLabel = 'Session time';
+  xAxisLabel = 'Session number';
   showYAxisLabel = true;
   yAxisLabel = 'Session duration';
   timeline = true;

@@ -1,9 +1,7 @@
-<h1>{{this.testString}}</h1>
-<h2>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</h2>
+
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
   <h1 class="card-header bg-info">
-    Welcome to {{ title }}!
+    Welcome to People Counter statistics!
   </h1>
   <h3 class="text-secondary">
     Detection summary
@@ -25,13 +23,13 @@
         [legend]="showLegend"
         [showXAxisLabel]="showXAxisLabel"
         [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
+        [xAxisLabel]="xAxisLabelDuration"
+        [yAxisLabel]="yAxisLabelDuration"
         (select)="onSelect($event)">
       </ngx-charts-bar-vertical>
     </div>
   </div>
-  <div class="col">
+  <!--<div class="col">
     <div class="row">
       <h4>
         Vertical Bar Chart Normalized
@@ -52,26 +50,24 @@
         (select)="onSelect($event)">
       </ngx-charts-bar-vertical-normalized>
     </div>
-  </div>
-</div>
+  </div>-->
+  <br><br><br>
 <div class="row ml-5">
   <h4>
-    Stacked Vertical Bar Chart
+    Number of persons per frame in the last detection event
   </h4>
-</div>
-<div class="form-group row ml-5">
-  <ngx-charts-bar-vertical-stacked
+<!--<div class="form-group row ml-5">-->
+  <ngx-charts-bar-vertical
     [view]="view"
-    [results]="multi"
+    [results]="detectionPersonPerFramerChartData"
     [gradient]="gradient"
     [xAxis]="showXAxis"
     [yAxis]="showYAxis"
     [legend]="showLegend"
     [showXAxisLabel]="showXAxisLabel"
     [showYAxisLabel]="showYAxisLabel"
-    [xAxisLabel]="xAxisLabel"
-    [yAxisLabel]="yAxisLabel"
+    [xAxisLabel]="xAxisLabelPerson"
+    [yAxisLabel]="yAxisLabelPerson"
     (select)="onSelect($event)">
-  </ngx-charts-bar-vertical-stacked>
-</div>
+  </ngx-charts-bar-vertical>
 </div>
