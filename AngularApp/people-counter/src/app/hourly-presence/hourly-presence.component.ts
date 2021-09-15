@@ -16,18 +16,12 @@ export class HourlyPresenceComponent implements OnInit {
     this.getDetectionData();
   }
 
- /* detectionData:DetectionDataResponse = {
-    timestamp:'',
-    secondsOfDetection:'',
-    detections:[],
-    numberOfDetections:''
-  };*/
   detectionData:any = null;
 
 
   public detectionsDurationChartData:any = [];
 
-  xAxisLabelDuration = 'Session time';
+  xAxisLabelDuration = 'Session number';
   yAxisLabelDuration = 'Session duration';
 
   public detectionPersonPerFramerChartData:any = [];
@@ -55,7 +49,8 @@ export class HourlyPresenceComponent implements OnInit {
     for(var i = 0; i < this.detectionData.length; i++) {
       var obj = this.detectionData[i];
       detDat.push({
-        "name": this.detectionData[i]["timestamp"],
+        //"name": this.detectionData[i]["timestamp"],
+        "name": i,
         "value": this.detectionData[i]["secondsOfDetection"]
       })
   }

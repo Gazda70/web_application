@@ -30,7 +30,7 @@ export class DetectionService {
       console.log("body: ");
       console.log(body);*/
       const body: DetectionData = {
-        networkType:networkType,
+        networkType:"CUSTOM",
         objThreshold:objThreshold,
         iouThreshold:iouThreshold,
         startTime:startTime,

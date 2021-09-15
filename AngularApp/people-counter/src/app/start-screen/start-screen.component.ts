@@ -122,7 +122,7 @@ export class StartScreenComponent implements OnInit, OnChanges {
   }
 
   validateDetectionSetup():boolean{
-    if(this.endTime != '' && this.neuralNetworkChosen != '') {
+    if(this.endTime != '') {
       const timeCheck = this.validateDetectionTime();
       if(timeCheck == true){
         console.log("timeCheck: " + timeCheck);
