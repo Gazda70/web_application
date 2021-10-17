@@ -13,7 +13,8 @@ export class StartScreenComponent implements OnInit, OnChanges {
   neuralNetworksAvailable:string[] = []
   neuralNetworkChosen = '';
   isDetecting:boolean = false;
-  endTime:string = '';
+  startTime:string = '';
+  endTime:string = '23:59';
   numberOfSecondsForDetection:number = 0;
 
  /* time: number = 0;

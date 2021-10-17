@@ -7,3 +7,14 @@ mat-form-field {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+.inline-block-child {
+  display: inline-block;
+}
+
+.flex-parent {
+  display: flex;
+}
+.flex-child {
+  flex: 1;
+}

@@ -17,6 +17,7 @@ import {MatInputModule} from "@angular/material/input";
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     MatMenuModule,
     FormsModule,
     ReactiveFormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [DetectionService],
   bootstrap: [AppComponent]
