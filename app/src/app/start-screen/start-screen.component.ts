@@ -15,7 +15,13 @@ export class StartScreenComponent implements OnInit, OnChanges {
   isDetecting:boolean = false;
   startTime:string = '';
   endTime:string = '23:59';
+  startTimeChosen:boolean = false;
   numberOfSecondsForDetection:number = 0;
+
+  onStartTimeChosen(){
+    this.startTimeChosen = true;
+    console.log("this.startTimeChosen: " + this.startTimeChosen);
+  }
 
  /* time: number = 0;
   display: any;

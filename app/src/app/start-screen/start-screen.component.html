@@ -9,12 +9,13 @@
   <div>
     <mat-form-field appearance="fill">
         <mat-label>Start time</mat-label>
-        <input matInput [ngxTimepicker]="startTimePicker" [max]="endTime" name="startTime" [disabled]="this.isDetecting" [(ngModel)] = "startTime">
+        <input matInput [ngxTimepicker]="startTimePicker" [max]="endTime" name="startTime" [disabled]="this.isDetecting" [(ngModel)] = "startTime"
+        (ngModelChange)="onStartTimeChosen()">
         <ngx-material-timepicker-toggle matSuffix [for]="startTimePicker"></ngx-material-timepicker-toggle>
         <ngx-material-timepicker  #startTimePicker></ngx-material-timepicker>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field *ngIf="startTimeChosen" appearance="fill">
       <mat-label>End time</mat-label>
       <input matInput [ngxTimepicker]="endTimePicker" [min]="startTime" name="endTime" [disabled]="this.isDetecting" [(ngModel)] = "endTime">
       <ngx-material-timepicker-toggle matSuffix [for]="endTimePicker"></ngx-material-timepicker-toggle>
