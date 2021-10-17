@@ -8,6 +8,13 @@
   <input [ngxTimepicker]="picker">-->
   <div>
     <mat-form-field appearance="fill">
+      <mat-label>Choose a date</mat-label>
+      <input matInput [matDatepicker]="datePicker">
+      <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
+      <mat-datepicker #datePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
         <mat-label>Start time</mat-label>
         <input matInput [ngxTimepicker]="startTimePicker" [max]="endTime" name="startTime" [disabled]="this.isDetecting" [(ngModel)] = "startTime"
         (ngModelChange)="onStartTimeChosen()">
