@@ -50,10 +50,29 @@ export class StartScreenComponent implements OnInit, OnChanges {
     console.log("minute:timeElements[0].split(':')[1]: " + timeElements[0].split(':')[1]); 
     console.log("halfOfDay:timeElements[1]: " + timeElements[1]);
     return {
-        hour:timeElements[0].split(':')[0],
+        hour:this.changeHours(timeElements[0].split(':')[0], timeElements[1]),
         minute:timeElements[0].split(':')[1],
         halfOfDay:timeElements[1]
      }
+  }
+
+  changeHours(time:string, halfOfDay:string):string{
+    if(halfOfDay=="PM"){
+    switch(time){
+        case "01": return "13";
+        case "02": return "14";
+        case "03": return "15";
+        case "04": return "16";
+        case "05": return "17";
+        case "06": return "18";
+        case "07": return "19";
+        case "08": return "20";
+        case "09": return "21";
+        case "10": return "22";
+        case "11": return "23";
+    }
+  }
+    return "";
   }
  /* time: number = 0;
   display: any;
