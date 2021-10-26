@@ -16,12 +16,25 @@ export interface DiscreteDetection{
 }
 
 
-export interface DetectionData{
+export interface DetectionRequest{
   networkType:string,
   objThreshold:number,
-  iouThreshold:number,
-  startTime:string,
-  numberOfSecondsForDetection:number
+  startDate:DetectionDate,
+  endDate:DetectionDate,
+  startTime:DetectionTime,
+  endTime:DetectionTime
+}
+
+export interface DetectionDate{
+  year:string,
+  month:string,
+  day:string,
+}
+
+export interface DetectionTime{
+  hour:string,
+  minute:string,
+  halfOfDay:string
 }
 
 export interface DetectionDataResponse{

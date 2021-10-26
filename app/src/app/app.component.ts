@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {DetectionService} from "./services/reqest.service";
-import {DetectionData} from "./api/detection-data";
+import {DetectionDate} from "./api/detection-data";
 
 @Component({
   selector: 'app-root',

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgxChartsModule} from "@swimlane/ngx-charts";
 import {DetectionService} from "../services/reqest.service";
-import {DetectionData, DetectionDataResponse} from "../api/detection-data";
+import {DetectionDate, DetectionDataResponse} from "../api/detection-data";
 import { NullVisitor } from '@angular/compiler/src/render3/r3_ast';
 import { Subject } from 'rxjs';
 

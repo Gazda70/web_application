@@ -1,7 +1,7 @@
 import {Component, ElementRef, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import {DetectionService} from "../services/reqest.service";
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {DetectionData, DetectionState} from "../api/detection-data";
+import {DetectionTime, DetectionDate, DetectionState} from "../api/detection-data";
 
 @Component({
   selector: 'app-start-screen',
@@ -13,6 +13,8 @@ export class StartScreenComponent implements OnInit, OnChanges {
   neuralNetworksAvailable:string[] = []
   neuralNetworkChosen = '';
   isDetecting:boolean = false;
+  startDate:string = '';
+  endDate:string = '';
   startTime:string = '';
   endTime:string = '23:59';
   startTimeChosen:boolean = false;
@@ -21,8 +23,38 @@ export class StartScreenComponent implements OnInit, OnChanges {
   onStartTimeChosen(){
     this.startTimeChosen = true;
     console.log("this.startTimeChosen: " + this.startTimeChosen);
+    console.log("startTime: " + this.startTime);
+    this.formatTime(this.startTime);
   }
 
+  onStartDateChosen(){
+    console.log("startDate: " + this.startDate);
+    this.formatDate(this.startDate);
+  }
+
+  formatDate(date:string):DetectionDate{
+    const dateElements = String(date).split(" ");
+    console.log("day:dateElements[2]: " + dateElements[2]);
+    console.log("month:dateElements[1]: " + dateElements[1]);
+    console.log("year:dateElements[3]: " + dateElements[3]);
+     return {
+       day:dateElements[2],
+       month:dateElements[1],
+       year:dateElements[3]
+     }
+  }
+
+  formatTime(time:string):DetectionTime{
+    const timeElements = String(time).split(" ");
+    console.log("hour:timeElements[0].split(':')[0]: " + timeElements[0].split(':')[0]);
+    console.log("minute:timeElements[0].split(':')[1]: " + timeElements[0].split(':')[1]); 
+    console.log("halfOfDay:timeElements[1]: " + timeElements[1]);
+    return {
+        hour:timeElements[0].split(':')[0],
+        minute:timeElements[0].split(':')[1],
+        halfOfDay:timeElements[1]
+     }
+  }
  /* time: number = 0;
   display: any;
   interval: any;
@@ -71,18 +103,22 @@ export class StartScreenComponent implements OnInit, OnChanges {
   }
 
   detect(){
-    const setupCheck = this.validateDetectionSetup();
-    console.log("setupCheck: " + setupCheck);
-    if(setupCheck == true){
+    //const setupCheck = this.validateDetectionSetup();
+    //console.log("setupCheck: " + setupCheck);
+   // if(setupCheck == true){
       this.isDetecting = true;
       console.log("Detecting");
-      this.detectionService.setupNewDetection('', this.numberOfSecondsForDetection,
-      this.convertNetworkName(this.neuralNetworkChosen), 0.3, 0.1).subscribe(
+      this.detectionService.setupNewDetection(  "SSD",
+        0.2,
+        this.formatDate(this.startDate),
+        this.formatDate(this.startDate),
+        this.formatTime(this.startTime),
+        this.formatTime(this.startTime)).subscribe(
         {
           next: (value => {console.log("Response: " + value);})
         }
       )
-    }
+    //}
   }
 
   convertNetworkName(nName:string):string{
