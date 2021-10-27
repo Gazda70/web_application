@@ -15,9 +15,9 @@
       <mat-datepicker #datePicker></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
+    <mat-form-field *ngIf="startDateChosen" appearance="fill">
         <mat-label>Start time</mat-label>
-        <input matInput [ngxTimepicker]="startTimePicker" [max]="endTime" name="startTime" [disabled]="this.isDetecting" [(ngModel)] = "startTime"
+        <input matInput [ngxTimepicker]="startTimePicker" [max]="endTime" name="startTime" [(ngModel)] = "startTime"
         (ngModelChange)="onStartTimeChosen()">
         <ngx-material-timepicker-toggle matSuffix [for]="startTimePicker"></ngx-material-timepicker-toggle>
         <ngx-material-timepicker  #startTimePicker></ngx-material-timepicker>
@@ -25,13 +25,13 @@
 
     <mat-form-field *ngIf="startTimeChosen" appearance="fill">
       <mat-label>End time</mat-label>
-      <input matInput [ngxTimepicker]="endTimePicker" [min]="startTime" name="endTime" [disabled]="this.isDetecting" [(ngModel)] = "endTime">
+      <input matInput [ngxTimepicker]="endTimePicker" [min]="startTime" name="endTime" [(ngModel)] = "endTime">
       <ngx-material-timepicker-toggle matSuffix [for]="endTimePicker"></ngx-material-timepicker-toggle>
       <ngx-material-timepicker #endTimePicker></ngx-material-timepicker>
     </mat-form-field>
 
 
-  <button mat-raised-button [disabled]="this.isDetecting" (click)="this.detect()">Start detection</button>
+  <button mat-raised-button (click)="this.detect()">Start detection</button>
 </div>
   <!--<mat-progress-spinner *ngIf="this.isDetecting" mode="indeterminate">-->
 

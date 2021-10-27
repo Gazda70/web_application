@@ -18,6 +18,7 @@ export class StartScreenComponent implements OnInit, OnChanges {
   startTime:string = '';
   endTime:string = '23:59';
   startTimeChosen:boolean = false;
+  startDateChosen:boolean = false;
   numberOfSecondsForDetection:number = 0;
 
   onStartTimeChosen(){
@@ -29,6 +30,7 @@ export class StartScreenComponent implements OnInit, OnChanges {
 
   onStartDateChosen(){
     console.log("startDate: " + this.startDate);
+    this.startDateChosen = true;
     this.formatDate(this.startDate);
   }
 
@@ -137,7 +139,19 @@ export class StartScreenComponent implements OnInit, OnChanges {
           next: (value => {console.log("Response: " + value);})
         }
       )
+      this.onDetectionRequestSubmitted();
     //}
+  }
+
+  onDetectionRequestSubmitted(){
+    alert("Detection request submitted!");
+    this.startTimeChosen = false;
+    this.startDateChosen = false;
+    this.neuralNetworkChosen = '';
+    this.startDate = '';
+    this.endDate = '';
+    this.startTime = '';
+    this.endTime = '23:59';
   }
 
   convertNetworkName(nName:string):string{
@@ -153,7 +167,7 @@ export class StartScreenComponent implements OnInit, OnChanges {
   setChosenNeuralNetwork(neuralNetworkName:string){
     this.neuralNetworkChosen = neuralNetworkName;
   }
-
+  /*
   validateDetectionTime():boolean{
     var re = /^(?:([01]?\d|2[0-3]):([0-5]?\d))?$/;
     if(re.test(this.endTime)){
@@ -185,7 +199,7 @@ export class StartScreenComponent implements OnInit, OnChanges {
 
   validateDetectionSetup():boolean{
     if(this.endTime != '') {
-      const timeCheck = this.validateDetectionTime();
+      //const timeCheck = this.validateDetectionTime();
       if(timeCheck == true){
         console.log("timeCheck: " + timeCheck);
         return true;
@@ -194,7 +208,7 @@ export class StartScreenComponent implements OnInit, OnChanges {
       window.alert("You didnt't fill out all necessary forms to start detecting !");
     }
     return false;
-  }
+  }*/
 
   calculateSecondsForDetection(hours:number, minutes:number){
     this.numberOfSecondsForDetection = hours * 3600 + minutes * 60;
