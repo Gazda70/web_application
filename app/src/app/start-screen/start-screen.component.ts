@@ -74,7 +74,7 @@ export class StartScreenComponent implements OnInit, OnChanges {
         case "11": return "23";
     }
   }
-    return "";
+    return time;
   }
  /* time: number = 0;
   display: any;
@@ -129,12 +129,12 @@ export class StartScreenComponent implements OnInit, OnChanges {
    // if(setupCheck == true){
       this.isDetecting = true;
       console.log("Detecting");
-      this.detectionService.setupNewDetection(  "SSD",
+      this.detectionService.setupNewDetection(  "SSD Mobilenet v2 320x320",
         0.2,
         this.formatDate(this.startDate),
         this.formatDate(this.startDate),
         this.formatTime(this.startTime),
-        this.formatTime(this.startTime)).subscribe(
+        this.formatTime(this.endTime)).subscribe(
         {
           next: (value => {console.log("Response: " + value);})
         }
