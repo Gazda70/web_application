@@ -47,7 +47,6 @@ export class HourlyPresenceComponent implements OnInit {
   initializeDetectionsDurationChart(){
     let detDat = [];
     for(var i = 0; i < this.detectionData.length; i++) {
-      var obj = this.detectionData[i];
       detDat.push({
         //"name": this.detectionData[i]["timestamp"],
         "name": i,

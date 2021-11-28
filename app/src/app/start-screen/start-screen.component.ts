@@ -25,13 +25,13 @@ export class StartScreenComponent implements OnInit, OnChanges {
     this.startTimeChosen = true;
     console.log("this.startTimeChosen: " + this.startTimeChosen);
     console.log("startTime: " + this.startTime);
-    this.formatTime(this.startTime);
+    //this.formatTime(this.startTime);
   }
 
   onStartDateChosen(){
     console.log("startDate: " + this.startDate);
     this.startDateChosen = true;
-    this.formatDate(this.startDate);
+    //this.formatDate(this.startDate);
   }
 
   formatDate(date:string):DetectionDate{
@@ -61,15 +61,15 @@ export class StartScreenComponent implements OnInit, OnChanges {
   changeHours(time:string, halfOfDay:string):string{
     if(halfOfDay=="PM"){
     switch(time){
-        case "01": return "13";
-        case "02": return "14";
-        case "03": return "15";
-        case "04": return "16";
-        case "05": return "17";
-        case "06": return "18";
-        case "07": return "19";
-        case "08": return "20";
-        case "09": return "21";
+        case "1": return "13";
+        case "2": return "14";
+        case "3": return "15";
+        case "4": return "16";
+        case "5": return "17";
+        case "6": return "18";
+        case "7": return "19";
+        case "8": return "20";
+        case "9": return "21";
         case "10": return "22";
         case "11": return "23";
     }
