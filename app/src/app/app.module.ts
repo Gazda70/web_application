@@ -20,13 +20,41 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatGridListModule} from '@angular/material/grid-list'; 
+import {MatGridListModule} from '@angular/material/grid-list';
+import { DashComponent } from './dash/dash.component';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { LayoutModule } from '@angular/cdk/layout';
+import { NavComponent } from './nav/nav.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
+import { CardComponent } from './card/card.component';
+import {ChartsModule} from "ng2-charts";
+import { StoreSessionsChartComponent } from './charts/store-sessions-chart/store-sessions-chart.component';
+import { AnnualSalesChartComponent } from './charts/annual-sales-chart/annual-sales-chart.component';
+import { SalesTrafficChartComponent } from './charts/sales-traffic-chart/sales-traffic-chart.component';
+import { ProductSalesChartComponent } from './charts/product-sales-chart/product-sales-chart.component';
+import { OrdersTableComponent } from './orders-table/orders-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
+import { MiniCardComponent } from './mini-card/mini-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HourlyPresenceComponent,
-    StartScreenComponent
+    StartScreenComponent,
+    DashComponent,
+    NavComponent,
+    CardComponent,
+    StoreSessionsChartComponent,
+    AnnualSalesChartComponent,
+    SalesTrafficChartComponent,
+    ProductSalesChartComponent,
+    OrdersTableComponent,
+    MiniCardComponent
   ],
   imports: [
     BrowserModule,
@@ -46,7 +74,17 @@ import {MatGridListModule} from '@angular/material/grid-list';
     NgxMaterialTimepickerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatGridListModule
+    MatGridListModule,
+    MatCardModule,
+    MatIconModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    ChartsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [DetectionService],
   bootstrap: [AppComponent]

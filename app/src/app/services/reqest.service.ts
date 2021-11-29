@@ -29,9 +29,6 @@ export class DetectionService {
                     endDate:DetectionDate,
                     startTime:DetectionTime,
                     endTime:DetectionTime): Observable<any>{
-      /*const body = JSON.stringify({'id':1, 'time': {'start': startTime, 'end': endTime}});
-      console.log("body: ");
-      console.log(body);*/
       const body = {
         networkType:networkType,
         objThreshold:objThreshold,
@@ -40,7 +37,6 @@ export class DetectionService {
         startTime:JSON.stringify(startTime),
         endTime:JSON.stringify(endTime)
       }
-
       return this.http.post(this.detectionSetupURL, body);
   }
 
