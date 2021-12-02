@@ -34,14 +34,14 @@ export class HourlyPresenceComponent implements OnInit {
 
 
   getDetectionData() {
-    this.detectionService.getDetectionStatistics()
+   /* this.detectionService.getDetectionStatistics()
       .subscribe(
         (data) => {console.log(data); 
           this.detectionData = JSON.parse(data);
           this.initializeDetectionsDurationChart();
           this.initializeDetectionsPersonNumberChart();
         }
-      );
+      );*/
   }
 
   initializeDetectionsDurationChart(){

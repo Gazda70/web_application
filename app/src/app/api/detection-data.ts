@@ -44,3 +44,8 @@ export interface DetectionDataResponse{
   numberOfDetections:string
 }
 
+export interface DetectionDataRequest{
+  dates:string[],
+  mode:string
+}
+
