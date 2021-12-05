@@ -49,3 +49,9 @@ export interface DetectionDataRequest{
   mode:string
 }
 
+export interface DetectionStatistics{
+  start_time:string,
+  people_min:number,
+  people_max:number
+}
+

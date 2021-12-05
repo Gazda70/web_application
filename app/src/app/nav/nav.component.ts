@@ -18,6 +18,6 @@ export class NavComponent {
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 
-  menuItems = ['dashboard', 'sales', 'orders', 'customers', 'products'];
+  menuItems = ['start-screen-component','statistics'];
 
 }

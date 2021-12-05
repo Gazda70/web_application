@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { DetectionDate } from 'src/app/api/detection-data';
+import { DetectionDate, DetectionStatistics } from 'src/app/api/detection-data';
 import { DetectionService } from 'src/app/services/reqest.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class StoreSessionsChartComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
@@ -34,32 +34,33 @@ export class StoreSessionsChartComponent implements OnInit {
 
   getDetectionData() {
     this.detectionService.getDetectionStatistics({
-      day:"24",
-      month:"Nov",
+      day:"05",
+      month:"Dec",
       year:"2021"
     },{
-      day:"25",
-      month:"Nov",
+      day:"06",
+      month:"Dec",
       year:"2021"
     }, "period")
       .subscribe(
         (data) => {
-          /*console.log(data); 
-          this.detectionData = JSON.parse(data);
-          this.initializePeopleNumberChartForDetectionPeriodsInGivenDate('');*/
+          console.log(data); 
+          this.detectionData = data;
+
+          this.initializePeopleNumberChartForDetectionPeriodsInGivenDate();
         }
       );
   }
 
-  initializePeopleNumberChartForDetectionPeriodsInGivenDate(date:string){
-    let detDat = [];
-    for(var i = 0; i < this.detectionData.length; i++) {
-      detDat.push({
-        "data": [],
-        "label": this.detectionData[i]["secondsOfDetection"]
-      })
-  }
-    this.barChartData = detDat
+  initializePeopleNumberChartForDetectionPeriodsInGivenDate(){
+    console.log("this.detectionData[detection_period_stats]");
+    console.log(this.detectionData["detection_period_stats"])
+    let stats = this.detectionData["detection_period_stats"]
+    for (var i = 0;  i < stats.length; i ++){
+      this.barChartData = [{data: [stats[i]["people_min"]], label:"Minimal people count"},
+      {data: [stats[i]["people_max"]], label:"Maximal people count"}]
+      this.barChartLabels = [stats[i]["start_time"]]
+    }
   }
 
   /*formatDate(date:string):DetectionDate{
