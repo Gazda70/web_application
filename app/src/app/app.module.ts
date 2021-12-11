@@ -31,15 +31,15 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { CardComponent } from './card/card.component';
 import {ChartsModule} from "ng2-charts";
-import { StoreSessionsChartComponent } from './charts/store-sessions-chart/store-sessions-chart.component';
+import { StoreSessionsChartComponent } from './charts/detection_statistics-chart/store-sessions-chart.component';
 import { AnnualSalesChartComponent } from './charts/annual-sales-chart/annual-sales-chart.component';
 import { SalesTrafficChartComponent } from './charts/sales-traffic-chart/sales-traffic-chart.component';
 import { ProductSalesChartComponent } from './charts/product-sales-chart/product-sales-chart.component';
-import { OrdersTableComponent } from './orders-table/orders-table.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MiniCardComponent } from './mini-card/mini-card.component';
+import { OrdersTableComponent } from './orders-table/orders-table.component';
 
 @NgModule({
   declarations: [
@@ -53,8 +53,8 @@ import { MiniCardComponent } from './mini-card/mini-card.component';
     AnnualSalesChartComponent,
     SalesTrafficChartComponent,
     ProductSalesChartComponent,
-    OrdersTableComponent,
-    MiniCardComponent
+    MiniCardComponent,
+    OrdersTableComponent
   ],
   imports: [
     BrowserModule,

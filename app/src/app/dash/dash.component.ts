@@ -9,7 +9,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 })
 export class DashComponent {
   /** Based on the screen size, switch from standard to one column per row */
-  detectionData = [{id:1, date:'29.11.2021', neuralNetwork:'SSD Mobilenet v2 320x320', status:'ongoing', numberOfPeopleDetected:'not known'}]
+  //detectionData = [{id:1, date:'29.11.2021', neuralNetwork:'SSD Mobilenet v2 320x320', status:'ongoing', numberOfPeopleDetected:'not known'}]
 
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -30,6 +30,11 @@ export class DashComponent {
       };
     })
   );
+  selectedDate: any;
 
   constructor(private breakpointObserver: BreakpointObserver) {}
+
+  onDateSelected() {
+
+  }
 }

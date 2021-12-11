@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {HourlyPresenceComponent} from "./hourly-presence/hourly-presence.component";
 import {StartScreenComponent} from "./start-screen/start-screen.component";
 import {DashComponent} from "./dash/dash.component";
-import { StoreSessionsChartComponent } from './charts/store-sessions-chart/store-sessions-chart.component';
+import { StoreSessionsChartComponent } from './charts/detection_statistics-chart/store-sessions-chart.component';
 
 const routes: Routes = [
   { path: 'hourly-presence-component', component: HourlyPresenceComponent },
