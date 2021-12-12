@@ -39,7 +39,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MiniCardComponent } from './mini-card/mini-card.component';
-import { OrdersTableComponent } from './orders-table/orders-table.component';
+//import { OrdersTableComponent } from './orders-table/orders-table.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +54,7 @@ import { OrdersTableComponent } from './orders-table/orders-table.component';
     SalesTrafficChartComponent,
     ProductSalesChartComponent,
     MiniCardComponent,
-    OrdersTableComponent
+    //OrdersTableComponent
   ],
   imports: [
     BrowserModule,

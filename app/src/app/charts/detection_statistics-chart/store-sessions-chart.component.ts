@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { DetectionDate, DetectionStatistics } from 'src/app/api/detection-data';
@@ -11,11 +11,11 @@ import { DetectionService } from 'src/app/services/reqest.service';
 })
 export class StoreSessionsChartComponent implements OnInit {
 
+  @Input() detectionData:any = null;
+
   constructor(private detectionService:DetectionService) { 
-   this.getDetectionData();
   }
 
-  detectionData:any = null;
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -32,35 +32,31 @@ export class StoreSessionsChartComponent implements OnInit {
 
   public barChartData: ChartDataSets[] = [];
 
-  getDetectionData() {
-    this.detectionService.getDetectionStatistics({
-      day:"05",
-      month:"Dec",
-      year:"2021"
-    },{
-      day:"06",
-      month:"Dec",
-      year:"2021"
-    }, "period")
-      .subscribe(
-        (data) => {
-          console.log(data); 
-          this.detectionData = data;
-
-          this.initializePeopleNumberChartForDetectionPeriodsInGivenDate();
-        }
-      );
+  ngOnChanges(){
+    if(this.detectionData != null){
+      this.initializePeopleNumberChartForDetectionPeriodsInGivenDate();
+    }
   }
 
   initializePeopleNumberChartForDetectionPeriodsInGivenDate(){
     console.log("this.detectionData[detection_period_stats]");
     console.log(this.detectionData["detection_period_stats"])
     let stats = this.detectionData["detection_period_stats"]
+    var data = []
     for (var i = 0;  i < stats.length; i ++){
-      this.barChartData = [{data: [stats[i]["people_min"]], label:"Minimal people count"},
-      {data: [stats[i]["people_max"]], label:"Maximal people count"}]
-      this.barChartLabels = [stats[i]["start_time"]]
+      
+      //data.push({data: [stats[i]["people_min"]], label:"Minimal people count"});
+      /*data.push({data: [stats[i]["people_max"]], label:"Maximal people count"});
+      this.barChartLabels.push(stats[i]["start_time"]);*/
+      data.push({data: [stats[i]["people_max"]],label: stats[i]["start_time"] as string});
+      /*data.push({data: [stats[i]["people_min"]], label:stats[i]["start_time"]});
+      data.push({data: [stats[i]["people_max"]], label:stats[i]["start_time"]});*/
     }
+    this.barChartData = data;
+    console.log("this.barChartData");
+    console.log(this.barChartData);
+    console.log("this.barChartLabels");
+    console.log(this.barChartLabels);
   }
 
   /*formatDate(date:string):DetectionDate{

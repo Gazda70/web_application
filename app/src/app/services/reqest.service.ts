@@ -49,6 +49,14 @@ export class DetectionService {
     }
     return this.http.post(this.detectionDataURL, body)
   }
+  getDetectionStatisticsForSingleDay(startDate:DetectionDate,
+    mode:string):Observable<any>{
+   const body = {
+     startDate:JSON.stringify(startDate),
+     mode:mode
+   }
+   return this.http.post(this.detectionDataURL, body)
+ }
   getDetectionState():Observable<string>{
     return this.http.get<string>(this.detectionStateURL, this.httpOptions)
   }

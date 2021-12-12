@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { DetectionService } from '../services/reqest.service';
+import {DetectionTime, DetectionDate} from "../api/detection-data";
 
 @Component({
   selector: 'app-dash',
@@ -10,6 +12,14 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 export class DashComponent {
   /** Based on the screen size, switch from standard to one column per row */
   //detectionData = [{id:1, date:'29.11.2021', neuralNetwork:'SSD Mobilenet v2 320x320', status:'ongoing', numberOfPeopleDetected:'not known'}]
+
+  constructor(private breakpointObserver: BreakpointObserver,
+    private detectionService:DetectionService) { 
+  }
+
+  selectedDate:string = '';
+
+  detectionData: any;
 
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
@@ -30,11 +40,29 @@ export class DashComponent {
       };
     })
   );
-  selectedDate: any;
-
-  constructor(private breakpointObserver: BreakpointObserver) {}
 
   onDateSelected() {
-
+    if(this.selectedDate != ''){
+    this.detectionService.getDetectionStatisticsForSingleDay(this.formatDate(this.selectedDate),
+     "single_day")
+      .subscribe(
+        (data) => {
+          console.log(data); 
+          this.detectionData = data;
+        }
+      );
+    }
   }
+  formatDate(date:string):DetectionDate{
+    const dateElements = String(date).split(" ");
+    console.log("day:dateElements[2]: " + dateElements[2]);
+    console.log("month:dateElements[1]: " + dateElements[1]);
+    console.log("year:dateElements[3]: " + dateElements[3]);
+     return {
+       day:dateElements[2],
+       month:dateElements[1],
+       year:dateElements[3]
+     }
+  }
+
 }

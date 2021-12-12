@@ -31,15 +31,15 @@
       </app-card>
     </mat-grid-tile>-->
     <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
-      <app-card title="Detection statistics">
-        <app-store-sessions-chart></app-store-sessions-chart>
+      <app-card title="Detection statistics - maximum people count">
+        <app-store-sessions-chart [detectionData]=this.detectionData></app-store-sessions-chart>
       </app-card>
     </mat-grid-tile>
     <!--Table-->
-    <mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols" [rowspan]="( cardLayout | async )?.table?.rows">
+    <!--<mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols" [rowspan]="( cardLayout | async )?.table?.rows">
       <app-card title="Latest Orders">
         <app-orders-table></app-orders-table>
       </app-card>
-    </mat-grid-tile>
+    </mat-grid-tile>-->
   </mat-grid-list>
 </div>
