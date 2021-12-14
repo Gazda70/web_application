@@ -32,7 +32,12 @@
     </mat-grid-tile>-->
     <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
       <app-card title="Detection statistics - maximum people count">
-        <app-store-sessions-chart [detectionData]=this.detectionData></app-store-sessions-chart>
+        <app-store-sessions-chart [detectionData]=this.detectionData [dataType]='people_max'></app-store-sessions-chart>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Detection statistics - minimum people count">
+        <app-store-sessions-chart [detectionData]=this.detectionData [dataType]='people_min'></app-store-sessions-chart>
       </app-card>
     </mat-grid-tile>
     <!--Table-->

@@ -13,12 +13,32 @@ export class StoreSessionsChartComponent implements OnInit {
 
   @Input() detectionData:any = null;
 
+  @Input() dataType:string = ''
+
   constructor(private detectionService:DetectionService) { 
   }
 
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    scales: {
+      yAxes: [{
+        display: true,
+        scaleLabel: {
+          display: true,
+          labelString: 'People number'
+        },
+        ticks: {
+          beginAtZero:true,
+          //min: 0,
+          //max: 5,
+          stepSize: 1,
+          /*suggestedMin: 0.5,
+          suggestedMax: 5.5,*/
+        }
+        }
+    ]
+  }
   };
   public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
@@ -33,7 +53,7 @@ export class StoreSessionsChartComponent implements OnInit {
   public barChartData: ChartDataSets[] = [];
 
   ngOnChanges(){
-    if(this.detectionData != null){
+    if(this.detectionData != null && this.dataType != ''){
       this.initializePeopleNumberChartForDetectionPeriodsInGivenDate();
     }
   }
@@ -48,7 +68,7 @@ export class StoreSessionsChartComponent implements OnInit {
       //data.push({data: [stats[i]["people_min"]], label:"Minimal people count"});
       /*data.push({data: [stats[i]["people_max"]], label:"Maximal people count"});
       this.barChartLabels.push(stats[i]["start_time"]);*/
-      data.push({data: [stats[i]["people_max"]],label: stats[i]["start_time"] as string});
+      data.push({data: [stats[i][this.dataType]],label: stats[i]["start_time"] as string});
       /*data.push({data: [stats[i]["people_min"]], label:stats[i]["start_time"]});
       data.push({data: [stats[i]["people_max"]], label:stats[i]["start_time"]});*/
     }

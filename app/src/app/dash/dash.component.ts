@@ -21,6 +21,10 @@ export class DashComponent {
 
   detectionData: any;
 
+  people_max = 'people_max';
+
+  people_min = 'people_min';
+
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
