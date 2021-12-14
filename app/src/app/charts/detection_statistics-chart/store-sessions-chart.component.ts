@@ -54,7 +54,11 @@ export class StoreSessionsChartComponent implements OnInit {
 
   ngOnChanges(){
     if(this.detectionData != null && this.dataType != ''){
-      this.initializePeopleNumberChartForDetectionPeriodsInGivenDate();
+      if(this.dataType=="day_summary"){
+        this.initializeDaySummarizingChart();
+      }else{
+        this.initializePeopleNumberChartForDetectionPeriodsInGivenDate();
+      }
     }
   }
 
@@ -68,7 +72,8 @@ export class StoreSessionsChartComponent implements OnInit {
       //data.push({data: [stats[i]["people_min"]], label:"Minimal people count"});
       /*data.push({data: [stats[i]["people_max"]], label:"Maximal people count"});
       this.barChartLabels.push(stats[i]["start_time"]);*/
-      data.push({data: [stats[i][this.dataType]],label: stats[i]["start_time"] as string});
+      data.push({data: [stats[i][this.dataType]],
+        label: (stats[i]["start_time"] as string) + "-" + (stats[i]["end_time"] as string)});
       /*data.push({data: [stats[i]["people_min"]], label:stats[i]["start_time"]});
       data.push({data: [stats[i]["people_max"]], label:stats[i]["start_time"]});*/
     }
@@ -79,6 +84,14 @@ export class StoreSessionsChartComponent implements OnInit {
     console.log(this.barChartLabels);
   }
 
+  initializeDaySummarizingChart(){
+    let stats = this.detectionData["whole_day_stats"];
+    console.log("Whole day stats");
+    console.log(this.detectionData["whole_day_stats"]);
+    this.barChartData = [{data:[stats["people_min"]], label:"Minimal people count"},
+  {data:[stats["people_max"]], label:"Maximal people count"},
+  {data:[stats["people_avg"]], label:"Average people count"}]
+    }
   /*formatDate(date:string):DetectionDate{
     const dateElements = String(date).split(" ");
     console.log("day:dateElements[2]: " + dateElements[2]);

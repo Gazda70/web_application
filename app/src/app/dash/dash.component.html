@@ -40,6 +40,16 @@
         <app-store-sessions-chart [detectionData]=this.detectionData [dataType]='people_min'></app-store-sessions-chart>
       </app-card>
     </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Detection statistics - average people count">
+        <app-store-sessions-chart [detectionData]=this.detectionData [dataType]='people_avg'></app-store-sessions-chart>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Day summary">
+        <app-store-sessions-chart [detectionData]=this.detectionData [dataType]='day_summary'></app-store-sessions-chart>
+      </app-card>
+    </mat-grid-tile>
     <!--Table-->
     <!--<mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols" [rowspan]="( cardLayout | async )?.table?.rows">
       <app-card title="Latest Orders">

@@ -25,6 +25,10 @@ export class DashComponent {
 
   people_min = 'people_min';
 
+  people_avg = 'people_avg';
+
+  day_summary = 'day_summary';
+
   cardLayout = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map(({ matches }) => {
       if (matches) {
