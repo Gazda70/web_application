@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HourlyPresenceComponent } from './hourly-presence/hourly-presence.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { StartScreenComponent } from './start-screen/start-screen.component';
@@ -32,29 +31,18 @@ import { MatListModule } from '@angular/material/list';
 import { CardComponent } from './card/card.component';
 import {ChartsModule} from "ng2-charts";
 import { StoreSessionsChartComponent } from './charts/detection_statistics-chart/store-sessions-chart.component';
-import { AnnualSalesChartComponent } from './charts/annual-sales-chart/annual-sales-chart.component';
-import { SalesTrafficChartComponent } from './charts/sales-traffic-chart/sales-traffic-chart.component';
-import { ProductSalesChartComponent } from './charts/product-sales-chart/product-sales-chart.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MiniCardComponent } from './mini-card/mini-card.component';
-//import { OrdersTableComponent } from './orders-table/orders-table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HourlyPresenceComponent,
     StartScreenComponent,
     DashComponent,
     NavComponent,
     CardComponent,
     StoreSessionsChartComponent,
-    AnnualSalesChartComponent,
-    SalesTrafficChartComponent,
-    ProductSalesChartComponent,
-    MiniCardComponent,
-    //OrdersTableComponent
   ],
   imports: [
     BrowserModule,
