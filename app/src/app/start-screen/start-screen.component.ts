@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {DetectionService} from "../services/reqest.service";
 import {DetectionTime, DetectionDate} from "../api/detection-data";
 
@@ -9,11 +9,10 @@ import {DetectionTime, DetectionDate} from "../api/detection-data";
 })
 export class StartScreenComponent {
 
-  neuralNetworksAvailable:string[] = []
-  neuralNetworkChosen = '';
   isDetecting:boolean = false;
-  startDate:string = '';
-  endDate:string = '';
+  todayDate: Date = new Date();
+  currentTime:string = '00:00';
+  startDate:Date = new Date();
   startTime:string = '';
   endTime:string = '23:59';
   startTimeChosen:boolean = false;
@@ -24,10 +23,13 @@ export class StartScreenComponent {
   }
 
   onStartDateChosen(){
+    if(this.startDate == this.todayDate) {
+      this.currentTime = this.todayDate.getHours() + ":" + this.todayDate.getMinutes();
+    }
     this.startDateChosen = true;
   }
 
-  formatDate(date:string):DetectionDate{
+  formatDate(date:Date):DetectionDate{
     const dateElements = String(date).split(" ");
      return {
        day:dateElements[2],
@@ -67,11 +69,8 @@ export class StartScreenComponent {
 
 
   constructor(private detectionService:DetectionService) {
-    this.neuralNetworksAvailable.push("GazdaWitekLipka Detector");
-    this.neuralNetworksAvailable.push("SSD Mobilenetv2 Detector");
-    this.neuralNetworksAvailable.push("YOLO Tiny v2 Detector");
+    this.todayDate = new Date();
   }
-
 
   detect(){
       this.isDetecting = true;
@@ -92,9 +91,7 @@ export class StartScreenComponent {
     alert("Detection request submitted!");
     this.startTimeChosen = false;
     this.startDateChosen = false;
-    this.neuralNetworkChosen = '';
-    this.startDate = '';
-    this.endDate = '';
+    this.startDate = this.todayDate;
     this.startTime = '';
     this.endTime = '23:59';
   }

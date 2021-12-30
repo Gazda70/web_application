@@ -5,7 +5,7 @@ import {DashComponent} from "./dash/dash.component";
 import { StoreSessionsChartComponent } from './charts/detection_statistics-chart/store-sessions-chart.component';
 
 const routes: Routes = [
-  { path: 'start-screen-component', component: StartScreenComponent },
+  { path: 'start', component: StartScreenComponent },
   { path: 'statistics', component: DashComponent },
 ];
 
