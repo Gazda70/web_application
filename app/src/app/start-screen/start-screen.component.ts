@@ -12,7 +12,7 @@ export class StartScreenComponent {
   isDetecting:boolean = false;
   todayDate: Date = new Date();
   currentTime:string = '00:00';
-  startDate:Date = new Date();
+  startDate:Date|undefined = undefined;
   startTime:string = '';
   endTime:string = '23:59';
   startTimeChosen:boolean = false;
@@ -23,8 +23,13 @@ export class StartScreenComponent {
   }
 
   onStartDateChosen(){
-    if(this.startDate == this.todayDate) {
+    console.log("this.startDate: " + this.startDate);
+    console.log("this.todayDate: " + this.todayDate);
+    if(this.startDate?.getDay() == this.todayDate.getDay()
+    && this.startDate?.getMonth() == this.todayDate.getMonth()
+    && this.startDate?.getFullYear() == this.todayDate.getFullYear()) {
       this.currentTime = this.todayDate.getHours() + ":" + this.todayDate.getMinutes();
+      console.log("Current time: " + this.currentTime);
     }
     this.startDateChosen = true;
   }
@@ -73,6 +78,7 @@ export class StartScreenComponent {
   }
 
   detect(){
+    if(this.startDate != null && this.startTime != '' && this.endTime != ''){
       this.isDetecting = true;
       this.detectionService.setupNewDetection(  "SSD Mobilenet v2 320x320",
         0.2,
@@ -85,6 +91,9 @@ export class StartScreenComponent {
         }
       )
       this.onDetectionRequestSubmitted();
+    }else{
+      alert("You didn't fill out all necessary forms!");
+    }
   }
 
   onDetectionRequestSubmitted(){
