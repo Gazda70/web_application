@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Label } from 'ng2-charts';
-import { DetectionDate, DetectionStatistics } from 'src/app/api/detection-data';
-import { DetectionService } from 'src/app/services/reqest.service';
 
 @Component({
   selector: 'app-store-sessions-chart',
@@ -14,10 +12,6 @@ export class StoreSessionsChartComponent{
   @Input() detectionData:any = null;
 
   @Input() dataType:string = ''
-
-  constructor(private detectionService:DetectionService) {
-  }
-
 
   public barChartOptions: ChartOptions = {
     responsive: true,

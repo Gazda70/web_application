@@ -1,6 +1,5 @@
 <!--dash.component.html-->
 <div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
   <mat-form-field appearance="fill">
     <mat-label>Choose a date</mat-label>
     <input matInput [matDatepicker]="datePicker" [(ngModel)]="selectedDate"
@@ -9,27 +8,6 @@
     <mat-datepicker #datePicker></mat-datepicker>
   </mat-form-field>
   <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
-    <!--Mini Cards-->
-    <!--<mat-grid-tile *ngFor="let dt of detectionData" [colspan]="( cardLayout | async )?.miniCard?.cols"
-                   [rowspan]="( cardLayout | async )?.miniCard?.rows">
-      <app-mini-card [textValue]="dt.date" [value]="dt.neuralNetwork" [color]="dt.status" ></app-mini-card>
-    </mat-grid-tile>-->
-    <!--Charts-->
-    <!--<mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
-      <app-card title="Monthly Revenue">
-        <app-annual-sales-chart></app-annual-sales-chart>
-      </app-card>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
-      <app-card title="Product Sales">
-        <app-product-sales-chart></app-product-sales-chart>
-      </app-card>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
-      <app-card title="Sales by Traffic Source">
-        <app-sales-traffic-chart></app-sales-traffic-chart>
-      </app-card>
-    </mat-grid-tile>-->
     <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
       <app-card title="Detection statistics - maximum people count">
         <app-store-sessions-chart [detectionData]=this.detectionData [dataType]='people_max'></app-store-sessions-chart>
@@ -50,11 +28,5 @@
         <app-store-sessions-chart [detectionData]=this.detectionData [dataType]='day_summary'></app-store-sessions-chart>
       </app-card>
     </mat-grid-tile>
-    <!--Table-->
-    <!--<mat-grid-tile [colspan]="( cardLayout | async )?.table?.cols" [rowspan]="( cardLayout | async )?.table?.rows">
-      <app-card title="Latest Orders">
-        <app-orders-table></app-orders-table>
-      </app-card>
-    </mat-grid-tile>-->
   </mat-grid-list>
 </div>

@@ -11,10 +11,9 @@ import {DetectionTime, DetectionDate} from "../api/detection-data";
 })
 export class DashComponent {
   /** Based on the screen size, switch from standard to one column per row */
-  //detectionData = [{id:1, date:'29.11.2021', neuralNetwork:'SSD Mobilenet v2 320x320', status:'ongoing', numberOfPeopleDetected:'not known'}]
 
   constructor(private breakpointObserver: BreakpointObserver,
-    private detectionService:DetectionService) { 
+    private detectionService:DetectionService) {
   }
 
   selectedDate:string = '';
@@ -55,7 +54,7 @@ export class DashComponent {
      "single_day")
       .subscribe(
         (data) => {
-          console.log(data); 
+          console.log(data);
           this.detectionData = data;
         }
       );
