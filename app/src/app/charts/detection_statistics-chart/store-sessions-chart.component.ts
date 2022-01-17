@@ -15,6 +15,11 @@ export class StoreSessionsChartComponent{
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+    },
     scales: {
       yAxes: [{
         display: true,
@@ -30,7 +35,7 @@ export class StoreSessionsChartComponent{
     ]
   }
   };
-  public barChartLabels: Label[] = [];
+  public barChartLabels: Label[] = ["Detection data"];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
